@@ -1,0 +1,15 @@
+[package]
+name = "rc"
+version = "0.1.0"
+authors = ["rchan"]
+
+[dependencies]
+env_logger = "0.5"
+
+actix = "0.7"
+actix-web = "0.7"
+dotenv = "0.13.0"
+askama = "0.7"
+
+[build-dependencies]
+askama = "0.7"
