@@ -5013,7 +5013,7 @@ var elm$core$Platform$Cmd$batch = _Platform_batch;
 var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
 var author$project$Main$init = function (flags) {
 	return _Utils_Tuple2(
-		A3(author$project$Main$Model, 'Spokane', 0.0, flags.aq),
+		A3(author$project$Main$Model, '', 0.0, flags.aq),
 		elm$core$Platform$Cmd$none);
 };
 var elm$core$Platform$Sub$batch = _Platform_batch;
@@ -8228,8 +8228,20 @@ var author$project$Main$globalStyle = rtfeldman$elm_css$Css$Global$global(
 		]));
 var rtfeldman$elm_css$Html$Styled$h1 = rtfeldman$elm_css$Html$Styled$node('h1');
 var author$project$Main$modelTxt = A2(rtfeldman$elm_css$Html$Styled$styled, rtfeldman$elm_css$Html$Styled$h1, _List_Nil);
+var rtfeldman$elm_css$Css$borderBottom3 = rtfeldman$elm_css$Css$prop3('border-bottom');
 var rtfeldman$elm_css$Html$Styled$input = rtfeldman$elm_css$Html$Styled$node('input');
-var author$project$Main$txt = A2(rtfeldman$elm_css$Html$Styled$styled, rtfeldman$elm_css$Html$Styled$input, _List_Nil);
+var author$project$Main$txt = A2(
+	rtfeldman$elm_css$Html$Styled$styled,
+	rtfeldman$elm_css$Html$Styled$input,
+	_List_fromArray(
+		[
+			A2(rtfeldman$elm_css$Css$property, 'all', 'unset'),
+			A3(
+			rtfeldman$elm_css$Css$borderBottom3,
+			rtfeldman$elm_css$Css$px(1),
+			rtfeldman$elm_css$Css$solid,
+			rtfeldman$elm_css$Css$hex('000'))
+		]));
 var rtfeldman$elm_css$VirtualDom$Styled$text = function (str) {
 	return rtfeldman$elm_css$VirtualDom$Styled$Unstyled(
 		elm$virtual_dom$VirtualDom$text(str));

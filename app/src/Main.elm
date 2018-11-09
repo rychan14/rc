@@ -33,7 +33,7 @@ type alias Config =
 
 init : Config -> (Model, Cmd Msg)
 init flags =
-  ( Model "Spokane" 0.0 flags.apiKey
+  ( Model "" 0.0 flags.apiKey
   , Cmd.none
   )
 
@@ -97,17 +97,20 @@ btn =
 txt : List (Attribute Msg) -> List (Html Msg) -> Html Msg
 txt =
   styled input
-    [ ]
+    [ property "all" "unset"
+    , borderBottom3 (px 1) solid (hex "000")
+    ]
 
 modelTxt =
   styled h1
     []
 
-globalStyle = global
-  [ everything 
-    [ fontFamilies [ "Verdana" ]
+globalStyle = 
+  global
+    [ everything 
+      [ fontFamilies [ "Verdana" ]
+      ]
     ]
-  ]
 
 view : Model -> Document Msg
 view model =
@@ -119,7 +122,6 @@ view model =
       , Attributes.value model.city
       ]
       []
-    -- , modelTxt [] [ text model.city ]
     , modelTxt [] [ text (String.fromFloat model.temp) ]
     , btn [ onClick GrabData ] [ text "Grab Data!" ]
     ]
