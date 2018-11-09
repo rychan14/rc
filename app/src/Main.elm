@@ -2,7 +2,7 @@ module Main exposing (main)
 
 import Browser exposing (Document)
 import Css exposing (..)
-import Css.Global exposing (global, everything)
+import Css.Global exposing (global, everything, body)
 import Html.Styled exposing (..)
 import Html.Styled.Attributes as Attributes
 import Html.Styled.Events exposing (..)
@@ -23,7 +23,7 @@ main =
 
 type alias Model = 
   { city : String
-  , temp : Float
+  , temp : Maybe Float
   , apiKey: String
   }
 
@@ -33,7 +33,7 @@ type alias Config =
 
 init : Config -> (Model, Cmd Msg)
 init flags =
-  ( Model "" 0.0 flags.apiKey
+  ( Model "" Nothing flags.apiKey
   , Cmd.none
   )
 
@@ -55,7 +55,7 @@ update msg model =
     NewData result -> 
       case result of
         Ok newTemp -> 
-          ( { model | temp = newTemp }
+          ( { model | temp = Just newTemp }
           , Cmd.none
           )
 
@@ -93,7 +93,6 @@ btn =
     , margin (px 12)
     , outline none
     , padding2 (px 5) (px 10)
-    , property "user-select" "none"
     , hover
       [ backgroundColor (hex "2a3132")
       , color (hex "fff")
@@ -115,13 +114,40 @@ txt =
 
 modelTxt =
   styled h1
-    []
+    [ color (hex "336b87") ]
+
+-- UI Components
 
 globalStyle = 
   global
     [ everything 
-      [ fontFamilies [ "Verdana" ]
+      [ boxSizing borderBox
+      , fontFamilies [ "Verdana" ]
       ]
+    , body
+      [ backgroundColor (hex "e5e5e5")
+      , margin (px 0)
+      , overflow hidden
+      ]
+    ]
+
+container = 
+  styled div 
+    [ overflow auto
+    , padding (px 10)
+    , width (vw 100)
+    ]
+
+navi =
+  styled div
+    [ backgroundColor (hex "2A3132")
+    , bottom (px 0)
+    , height (vw 100)
+    , maxWidth (px 100)
+    , position fixed
+    , right (px 0)
+    , top (px 0)
+    , width (vw 20)
     ]
 
 view : Model -> Document Msg
@@ -129,16 +155,27 @@ view model =
   { title = "RC"
   , body = List.map toUnstyled
     [ globalStyle
-    , txt 
-      [ onInput NewCity
-      , Attributes.value model.city
+    , container [] 
+      [ txt 
+        [ onInput NewCity
+        , Attributes.value model.city
+        ]
+        []
+      , div []
+        [ p [] [ text "Temperature" ]
+        , modelTxt [] 
+          [ text
+            ( case model.temp of
+              Just value -> String.fromFloat value
+              Nothing -> ""
+            )
+          ]
+        ]
+      , btn [ onClick GrabData ] [ text "Grab Data!" ]
       ]
-      []
-    , modelTxt [] [ text (String.fromFloat model.temp) ]
-    , btn [ onClick GrabData ] [ text "Grab Data!" ]
     ]
   }
-  
+
 -- Http
 
 getData : Model -> Cmd Msg
@@ -146,14 +183,21 @@ getData model =
   Http.send NewData (Http.get (toUrl model.city model.apiKey) weatherDecoder)
 
 toUrl : String -> String -> String
+-- toUrl subject apiKey =
+--   Url.crossOrigin 
+--     "http://api.openweathermap.org"
+--     [ "data", "2.5", "weather" ]
+--     [ Url.string "APPID" apiKey
+--     , Url.string "q" subject
+--     ]
 toUrl subject apiKey =
-  Url.crossOrigin 
-    "http://api.openweathermap.org"
-    [ "data", "2.5", "weather" ]
-    [ Url.string "APPID" apiKey
-    , Url.string "q" subject
-    ]
+  Url.relative
+    [ "api", "data" ]
+    []
 
 weatherDecoder : Decode.Decoder Float
+-- weatherDecoder =
+--   Decode.field "main" (Decode.field "temp" Decode.float)
+
 weatherDecoder =
-  Decode.field "main" (Decode.field "temp" Decode.float)
+  Decode.field "temp" Decode.float
