@@ -76,20 +76,26 @@ subscriptions model =
   Sub.none
 
 -- View
+-- #FFF
+-- #90AFC5
+-- #336B87
+-- #2A3132
+-- #763626
+
 btn : List (Attribute Msg) -> List (Html Msg) -> Html Msg
 btn =
   styled button
     [ property "all" "unset"
-    , border3 (px 2) solid (hex "55af6a")
+    , border3 (px 2) solid (hex "2a3132")
     , borderRadius (px 2)
-    , color (hex "55af6a")
+    , color (hex "2a3132")
     , cursor pointer
     , margin (px 12)
     , outline none
     , padding2 (px 5) (px 10)
     , property "user-select" "none"
     , hover
-      [ backgroundColor (hex "55af6a")
+      [ backgroundColor (hex "2a3132")
       , color (hex "fff")
       ]
     ]
@@ -98,7 +104,13 @@ txt : List (Attribute Msg) -> List (Html Msg) -> Html Msg
 txt =
   styled input
     [ property "all" "unset"
-    , borderBottom3 (px 1) solid (hex "000")
+    , borderBottom3 (px 1) solid (hex "2a3132")
+    , active
+      [ borderBottom3 (px 1) solid (hex "90afc5")
+      ]
+    , focus
+      [ borderBottom3 (px 1) solid (hex "90afc5")
+      ]
     ]
 
 modelTxt =

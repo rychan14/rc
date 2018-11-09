@@ -8148,11 +8148,11 @@ var author$project$Main$btn = A2(
 			rtfeldman$elm_css$Css$border3,
 			rtfeldman$elm_css$Css$px(2),
 			rtfeldman$elm_css$Css$solid,
-			rtfeldman$elm_css$Css$hex('55af6a')),
+			rtfeldman$elm_css$Css$hex('2a3132')),
 			rtfeldman$elm_css$Css$borderRadius(
 			rtfeldman$elm_css$Css$px(2)),
 			rtfeldman$elm_css$Css$color(
-			rtfeldman$elm_css$Css$hex('55af6a')),
+			rtfeldman$elm_css$Css$hex('2a3132')),
 			rtfeldman$elm_css$Css$cursor(rtfeldman$elm_css$Css$pointer),
 			rtfeldman$elm_css$Css$margin(
 			rtfeldman$elm_css$Css$px(12)),
@@ -8166,7 +8166,7 @@ var author$project$Main$btn = A2(
 			_List_fromArray(
 				[
 					rtfeldman$elm_css$Css$backgroundColor(
-					rtfeldman$elm_css$Css$hex('55af6a')),
+					rtfeldman$elm_css$Css$hex('2a3132')),
 					rtfeldman$elm_css$Css$color(
 					rtfeldman$elm_css$Css$hex('fff'))
 				]))
@@ -8228,7 +8228,9 @@ var author$project$Main$globalStyle = rtfeldman$elm_css$Css$Global$global(
 		]));
 var rtfeldman$elm_css$Html$Styled$h1 = rtfeldman$elm_css$Html$Styled$node('h1');
 var author$project$Main$modelTxt = A2(rtfeldman$elm_css$Html$Styled$styled, rtfeldman$elm_css$Html$Styled$h1, _List_Nil);
+var rtfeldman$elm_css$Css$active = rtfeldman$elm_css$Css$pseudoClass('active');
 var rtfeldman$elm_css$Css$borderBottom3 = rtfeldman$elm_css$Css$prop3('border-bottom');
+var rtfeldman$elm_css$Css$focus = rtfeldman$elm_css$Css$pseudoClass('focus');
 var rtfeldman$elm_css$Html$Styled$input = rtfeldman$elm_css$Html$Styled$node('input');
 var author$project$Main$txt = A2(
 	rtfeldman$elm_css$Html$Styled$styled,
@@ -8240,7 +8242,25 @@ var author$project$Main$txt = A2(
 			rtfeldman$elm_css$Css$borderBottom3,
 			rtfeldman$elm_css$Css$px(1),
 			rtfeldman$elm_css$Css$solid,
-			rtfeldman$elm_css$Css$hex('000'))
+			rtfeldman$elm_css$Css$hex('2a3132')),
+			rtfeldman$elm_css$Css$active(
+			_List_fromArray(
+				[
+					A3(
+					rtfeldman$elm_css$Css$borderBottom3,
+					rtfeldman$elm_css$Css$px(1),
+					rtfeldman$elm_css$Css$solid,
+					rtfeldman$elm_css$Css$hex('90afc5'))
+				])),
+			rtfeldman$elm_css$Css$focus(
+			_List_fromArray(
+				[
+					A3(
+					rtfeldman$elm_css$Css$borderBottom3,
+					rtfeldman$elm_css$Css$px(1),
+					rtfeldman$elm_css$Css$solid,
+					rtfeldman$elm_css$Css$hex('90afc5'))
+				]))
 		]));
 var rtfeldman$elm_css$VirtualDom$Styled$text = function (str) {
 	return rtfeldman$elm_css$VirtualDom$Styled$Unstyled(
