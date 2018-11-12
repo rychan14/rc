@@ -1,7 +1,6 @@
 extern crate actix;
 extern crate actix_web;
 extern crate env_logger;
-#[macro_use]
 extern crate askama;
 extern crate dotenv;
 extern crate serde;
@@ -9,6 +8,7 @@ extern crate serde;
 extern crate serde_derive;
 extern crate serde_json;
 
+use std::env;
 // use actix::prelude::*;
 use actix_web::{
     fs,
@@ -25,7 +25,6 @@ use actix_web::{
     // State,
 };
 use dotenv::dotenv;
-use std::env;
 // use fs::NamedFile;
 use askama::Template;
 
@@ -39,6 +38,7 @@ struct RootTemplate<'a> {
 struct Data {
     temp: f64
 }
+
 
 fn index(_req: &HttpRequest) -> Result<HttpResponse, Error> {
     dotenv().ok();
@@ -75,7 +75,7 @@ fn main() {
     }).bind(host)
         .expect(&format!("could not bind to {}", host))
         .start();
-        
+
     println!("Starting http server: {}", host);
     let _ = sys.run();
 }
