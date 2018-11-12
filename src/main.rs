@@ -68,7 +68,7 @@ fn main() {
             App::new()
                 .resource("/", |r| r.f(index))
                 // .handler("/img", fs::StaticFiles::new("ui/dist/img").expect("fail to handle static images"))
-                .handler("/dist", fs::StaticFiles::new("app/dist").expect("fail to handle static js"))
+                .handler("/app/dist", fs::StaticFiles::new("app/dist").expect("fail to handle static js"))
                 // .handler("/css", fs::StaticFiles::new("app/dist/static/css").expect("fail to handle static css"))
                 // .handler("/", fs::StaticFiles::new("ui/dist").expect("fail to handle static files"))
         ]
