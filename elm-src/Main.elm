@@ -135,7 +135,7 @@ container =
   styled div 
     [ overflow auto
     , padding (px 10)
-    , width (vw 50)
+    , width (vw 100)
     ]
 
 navi =
