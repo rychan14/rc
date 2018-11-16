@@ -135,7 +135,7 @@ container =
   styled div 
     [ overflow auto
     , padding (px 10)
-    , width (vw 100)
+    , width (vw 50)
     ]
 
 navi =
@@ -156,23 +156,28 @@ view model =
   , body = List.map toUnstyled
     [ globalStyle
     , container [] 
-      [ txt 
-        [ onInput NewCity
-        , Attributes.value model.city
+      [ div []
+        [ 
         ]
-        []
-      , div []
-        [ p [] [ text "Temperature" ]
-        , modelTxt [] 
-          [ text
-            ( case model.temp of
-              Just value -> String.fromFloat value
-              Nothing -> ""
-            )
-          ]
-        ]
-      , btn [ onClick GrabData ] [ text "Grab Data!" ]
       ]
+    --   [ txt 
+    --     [ onInput NewCity
+    --     , Attributes.value model.city
+    --     ]
+    --     []
+    --   , div []
+    --     [ p [] [ text "Temperature" ]
+    --     , modelTxt [] 
+    --       [ text
+    --         ( case model.temp of
+    --           Just value -> String.fromFloat value
+    --           Nothing -> ""
+    --         )
+    --       ]
+    --     ]
+    --   , btn [ onClick GrabData ] [ text "Grab Data!" ]
+    --   ]
+    -- ]
     ]
   }
 

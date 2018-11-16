@@ -1,5 +1,6 @@
 extern crate actix;
 extern crate actix_web;
+extern crate listenfd;
 extern crate env_logger;
 extern crate askama;
 extern crate dotenv;
@@ -25,6 +26,7 @@ use actix_web::{
     // State,
 };
 use dotenv::dotenv;
+use listenfd::ListenFd;
 // use fs::NamedFile;
 use askama::Template;
 
@@ -59,23 +61,29 @@ fn get_api(_req: &HttpRequest) -> HttpResponse {
 fn main() {
     ::std::env::set_var("RUST_LOG", "actix_web=info");
     env_logger::init();
-    let host = "localhost:3000";
-    let sys = actix::System::new("rc");
-    server::new(move || {
+    let host = "127.0.0.1:3000";
+    let mut listenfd = ListenFd::from_env();
+    let mut server = server::new(move || {
         vec![ App::new()
                 .prefix("api")
                 .resource("/data", |r| r.method(http::Method::GET).f(get_api)),
             App::new()
                 .resource("/", |r| r.f(index))
                 // .handler("/img", fs::StaticFiles::new("ui/dist/img").expect("fail to handle static images"))
-                .handler("/dist", fs::StaticFiles::new("../../app/dist").expect("fail to handle static js"))
+                .handler("/dist", fs::StaticFiles::new("dist").expect("fail to handle static js"))
                 // .handler("/css", fs::StaticFiles::new("app/dist/static/css").expect("fail to handle static css"))
                 // .handler("/", fs::StaticFiles::new("ui/dist").expect("fail to handle static files"))
         ]
-    }).bind(host)
-        .expect(&format!("could not bind to {}", host))
-        .start();
+    });
+    
+    server = if let Some(l) = listenfd.take_tcp_listener(0).unwrap() {
+        server.listen(l)
+    } else {
+        server.bind(host)
+            .expect(&format!("could not bind to {}", host))
+            
+    };
 
     println!("Starting http server: {}", host);
-    let _ = sys.run();
+    server.run();
 }
