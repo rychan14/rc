@@ -138,6 +138,26 @@ container =
     , width (vw 100)
     ]
 
+fullPage =
+  styled div
+    [ alignItems center
+    , displayFlex
+    , flexDirection column
+    , height (vh 100)
+    , justifyContent center
+    , width (pct 100)
+    ]
+
+logo = 
+  styled div
+    [ display block
+    ]
+
+introBtns =
+  styled div
+    [ displayFlex
+    ]
+    
 navi =
   styled div
     [ backgroundColor (hex "2A3132")
@@ -156,8 +176,18 @@ view model =
   , body = List.map toUnstyled
     [ globalStyle
     , container [] 
-      [ div []
-        [ 
+      [ fullPage []
+        [ logo []
+          [ text "HEllO"
+          ]
+        , introBtns []
+          [ btn []
+            [ text "One"
+            ]
+          , btn []
+            [ text "Two"
+            ]
+          ]
         ]
       ]
     --   [ txt 
